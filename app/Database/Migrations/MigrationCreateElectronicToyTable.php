@@ -4,37 +4,28 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Toys extends Migration
-
+class MigrationCreateElectronicToyTable extends Migration
 {
     public function up()
     {
         $this->forge->addField([
-            'id'          => [
+            'id'           => [
                 'type'           => 'INT',
-                'constraint'     => 11,
+                'constraint'     => 5,
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'toy_id'      => [
-                'type'           => 'INT',
-                'unsigned'       => true,
+            'toy_id'       => [
+                'type'       => 'INT',
+                'unsigned'   => true,
             ],
             'battery_type' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '50',
             ],
-            'voltage'     => [
-                'type'       => 'DECIMAL',
-                'constraint' => '5,2',
-            ],
-            'created_at'  => [
-                'type'       => 'TIMESTAMP',
-                'null'       => true,
-            ],
-            'updated_at'  => [
-                'type'       => 'TIMESTAMP',
-                'null'       => true,
+            'voltage'      => [
+                'type'       => 'VARCHAR',
+                'constraint' => '50',
             ],
         ]);
         $this->forge->addKey('id', true);

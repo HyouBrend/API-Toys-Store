@@ -12,14 +12,21 @@ class ToysController extends ResourceController
 
     public function index()
     {
-        return $this->respond($this->model->findAll());
+        $toys = $this->model->findAll();
+        return $this->respond([
+            'message' => 'All toys retrieved successfully',
+            'data' => $toys
+        ]);
     }
 
     public function get($id = null)
     {
         $data = $this->model->find($id);
         if ($data) {
-            return $this->respond($data);
+            return $this->respond([
+                'message' => 'Toy retrieved successfully',
+                'data' => $data
+            ]);
         } else {
             return $this->failNotFound('Toy not found');
         }
@@ -29,7 +36,10 @@ class ToysController extends ResourceController
     {
         $data = $this->request->getPost();
         if ($this->model->insert($data)) {
-            return $this->respondCreated($data);
+            return $this->respondCreated([
+                'message' => 'Toy created successfully',
+                'data' => $data
+            ]);
         } else {
             return $this->failValidationErrors($this->model->errors());
         }
@@ -37,34 +47,86 @@ class ToysController extends ResourceController
 
     public function patch($id = null)
     {
+        if ($id === null) {
+            return $this->fail('ID is required', 400);
+        }
+
         $data = $this->request->getRawInput();
-        if ($this->model->update($id, $data)) {
-            return $this->respond($data);
+
+        if (empty($data)) {
+            return $this->failValidationErrors('No data provided to update');
+        }
+
+        $toy = $this->model->find($id);
+        if (!$toy) {
+            return $this->failNotFound('Toy not found');
+        }
+
+        $updatedData = array_merge($toy, $data);
+
+        if ($this->model->update($id, $updatedData)) {
+            $updatedToy = $this->model->find($id);
+            return $this->respond([
+                'message' => 'Toy updated successfully',
+                'data' => $updatedToy
+            ]);
         } else {
             return $this->failValidationErrors($this->model->errors());
         }
     }
 
+
     public function delete($id = null)
     {
-        // Cek apakah ID mainan yang diberikan ada di database
         $toy = $this->model->find($id);
-        
+
         if ($toy) {
-            // Jika mainan ditemukan, hapus mainan tersebut
             if ($this->model->delete($id)) {
-                // Mengembalikan respon sukses dengan detail mainan yang dihapus
                 return $this->respondDeleted([
-                    'id' => $id,
                     'message' => 'Toy deleted successfully',
-                    'deleted_toy' => $toy
+                    'data' => $toy
                 ]);
             } else {
                 return $this->fail('Failed to delete toy');
             }
         } else {
-            // Jika mainan tidak ditemukan, kembalikan respon not found
             return $this->failNotFound('Toy not found');
         }
+    }
+
+    public function filter()
+    {
+        $input = $this->request->getJSON();
+
+        $order = $input->order ?? null;
+        $type = $input->type ?? null;
+
+        $query = $this->model;
+
+        if ($type) {
+            $query = $query->where('type', $type);
+        }
+
+        if ($order === 'highest') {
+            $query = $query->orderBy('price', 'DESC');
+        } elseif ($order === 'lowest') {
+            $query = $query->orderBy('price', 'ASC');
+        }
+
+        $toys = $query->findAll();
+
+        return $this->respond([
+            'message' => 'Filtered toys retrieved successfully',
+            'data' => $toys
+        ]);
+    }
+
+    public function options()
+    {
+        return $this->response
+            ->setHeader('Access-Control-Allow-Origin', '*')
+            ->setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS')
+            ->setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+            ->setStatusCode(200);
     }
 }

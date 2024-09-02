@@ -4,36 +4,27 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class PlasticToys extends Migration
+class MigrationCreatePlasticToyTable extends Migration
 {
     public function up()
     {
         $this->forge->addField([
-            'id'          => [
+            'id'           => [
                 'type'           => 'INT',
-                'constraint'     => 11,
+                'constraint'     => 5,
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'toy_id'      => [
-                'type'           => 'INT',
-                'unsigned'       => true,
+            'toy_id'       => [
+                'type'       => 'INT',
+                'unsigned'   => true,
             ],
             'plastic_type' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => '50',
             ],
-            'is_bpa_free' => [
+            'is_bpa_free'  => [
                 'type'       => 'BOOLEAN',
-                'default'    => false,
-            ],
-            'created_at'  => [
-                'type'       => 'TIMESTAMP',
-                'null'       => true,
-            ],
-            'updated_at'  => [
-                'type'       => 'TIMESTAMP',
-                'null'       => true,
             ],
         ]);
         $this->forge->addKey('id', true);

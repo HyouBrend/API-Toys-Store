@@ -9,5 +9,8 @@ class PlasticToysModel extends Model
     protected $table      = 'PlasticToys';
     protected $primaryKey = 'id';
     protected $allowedFields = ['toy_id', 'plastic_type', 'is_bpa_free', 'created_at', 'updated_at'];
-    protected $useTtimestamps = true;
+
+    protected $useTimestamps = true;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 }

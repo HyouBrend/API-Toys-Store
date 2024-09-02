@@ -1,0 +1,128 @@
+.centered-container {
+  display: flex; /* Mengaktifkan flexbox */
+  justify-content: center; /* Memusatkan konten secara horizontal */
+  align-items: center; /* Memusatkan konten secara vertikal */
+  height: 100vh; /* Tinggi penuh viewport */
+}
+
+/* Gaya untuk elemen halaman detail */
+.detail-page {
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fbf8fc;
+}
+
+/* Gaya untuk header yang berisi ikon "Back" dan judul */
+.card-header {
+  display: flex; /* Mengatur elemen dalam satu baris */
+  align-items: center; /* Menyelaraskan elemen pada pusat vertikal */
+  justify-content: flex-start; /* Mengatur elemen di sebelah kiri */
+  border-bottom: none; /* Menghapus garis bawah default */
+  padding-bottom: 0;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin-right: 10px; /* Jarak antara ikon "Back" dan judul */
+  text-decoration: none; /* Menghapus garis bawah pada tautan */
+  color: inherit; /* Menggunakan warna teks default */
+}
+
+.detail-page .card-title {
+  font-size: 24px; /* Memperbesar ukuran font */
+  font-weight: bold; /* Membuat teks lebih tebal */
+  margin: 0;
+  color: #452a5c;
+}
+
+/* Detail informasi gaya */
+.detail-info {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 20px; /* Jarak bawah untuk keseluruhan detail info */
+}
+
+/* Gaya untuk semua elemen informasi spesifik */
+.info-row {
+  display: flex; /* Mengatur elemen dalam satu baris */
+  align-items: center; /* Menyelaraskan elemen pada pusat vertikal */
+  margin-bottom: 10px; /* Jarak antar baris */
+}
+
+.info-row p {
+  margin: 0; /* Menghapus margin default paragraf */
+  display: flex;
+  align-items: center; /* Pusatkan vertikal konten di dalam paragraf */
+  flex-grow: 1; /* Memungkinkan teks untuk mengambil ruang sisa */
+  color: #452a5c;
+}
+
+.info-row strong {
+  width: 100px; /* Menetapkan lebar tetap untuk label */
+  margin-right: 5px; /* Jarak antara label dan titik dua */
+  color: #452a5c;
+  text-align: left; /* Memastikan teks label sejajar kiri */
+}
+
+.colon {
+  display: inline-block; /* Mengatur titik dua agar tetap di baris yang sama */
+  width: 10px; /* Lebar tetap untuk titik dua */
+  text-align: center; /* Memastikan titik dua tetap berada di tengah */
+  margin-right: 5px; /* Jarak antara titik dua dan nilai informasi */
+}
+
+.edit-icon {
+  cursor: pointer; /* Mengubah cursor menjadi tangan saat diarahkan */
+  margin-left: 10px; /* Jarak antara detail info dan ikon edit */
+  color: #452a5c;
+}
+
+/* Gaya untuk blok informasi spesifik */
+.doll-specific-info,
+.plastic-specific-info,
+.electronic-specific-info {
+  border: 1px solid #6d5880;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+/* Gaya untuk judul spesifikasi */
+.doll-specific-info .card-title,
+.electronic-specific-info .card-title,
+.plastic-specific-info .card-title {
+  text-align: left;
+  font-weight: bold;
+}
+
+.edit-icon-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.edit-icon-global {
+  font-size: 18px;
+  color: #452a5c;
+}
+
+.edit-icon-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+}

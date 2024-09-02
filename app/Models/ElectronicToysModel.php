@@ -9,5 +9,8 @@ class ElectronicToysModel extends Model
     protected $table      = 'ElectronicToys';
     protected $primaryKey = 'id';
     protected $allowedFields = ['toy_id', 'battery_type', 'voltage', 'created_at', 'updated_at'];
+
     protected $useTimestamps = true;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 }
